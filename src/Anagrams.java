@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Problem01 {
+public class Anagrams {
     public static void main(String[] args) throws IOException {
         List<String> words = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
