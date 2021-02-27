@@ -33,7 +33,7 @@ public class Anagrams {
 
     private static void addListOfWords(List<String> words) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please enter list of word separated by ',':");
+        System.out.println("Please enter list of words separated by ',':");
         List<String> inputWords = Arrays.stream(reader.readLine().split(",")).collect(Collectors.toList());
         words.addAll(inputWords);
     }
@@ -73,10 +73,11 @@ public class Anagrams {
 
     private static void printResult(Map<String, String> result) {
         if (result.isEmpty()) {
-            System.out.println("There are no anagrams");
+            System.out.println("There are no anagrams.");
+            System.out.println();
             return;
         }
-        System.out.println("The Anagrams pair are:");
+        System.out.println("The Anagrams pairs are:");
         result.keySet().forEach(key -> System.out.printf("%s - %s%n", key, result.get(key)));
         System.out.println();
     }
