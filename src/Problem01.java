@@ -6,13 +6,37 @@ import java.util.stream.Collectors;
 
 public class Problem01 {
     public static void main(String[] args) throws IOException {
+        List<String> words = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        printMenu();
+        String input = reader.readLine();
+        while (!input.equals("")) {
+            switch (input) {
+                case "1" -> addListOfWords(words);
+                case "2" -> words.add(getWords());
+                case "3" -> {
+                    Map<String, String> result = checkWords(words);
+                    printResult(result);
+                }
+            }
+            printMenu();
+            input = reader.readLine();
+        }
+    }
 
-        List<String> words = getWords();
+    private static void printMenu() {
+        System.out.println("Please choose option:");
+        System.out.println("1 - for input list of words.");
+        System.out.println("2 - for input word");
+        System.out.println("3 - show result for acronyms");
+        System.out.println("'Enter' for exit.");
+    }
 
-        Map<String, String> result = checkWords(words);
-
-        printResult(result);
-
+    private static void addListOfWords(List<String> words) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please enter list of word separated by ',':");
+        List<String> inputWords = Arrays.stream(reader.readLine().split(",")).collect(Collectors.toList());
+        words.addAll(inputWords);
     }
 
     private static void printResult(Map<String, String> result) {
@@ -21,21 +45,20 @@ public class Problem01 {
             return;
         }
         System.out.println("The Acronyms pair are:");
-        result.keySet().forEach(key -> {
-            System.out.println(String.format("%s - %s", key, result.get(key)));
-        });
+        result.keySet().forEach(key -> System.out.printf("%s - %s%n", key, result.get(key)));
+        System.out.println();
     }
 
     private static Map<String, String> checkWords(List<String> words) {
         Map<String, String> result = new HashMap<>();
         for (int i = 0; i < words.size() - 1; i++) {
-            for (int j = i + 1; j < words.size() ; j++) {
+            for (int j = i + 1; j < words.size(); j++) {
                 String firstWord = words.get(i);
                 String secondWord = words.get(j);
-                List<String> secondWordAsList = new ArrayList<String>(Arrays.asList(secondWord.split("")));
+                List<String> secondWordAsList = new ArrayList<>(Arrays.asList(secondWord.split("")));
                 if (firstWord.length() == secondWordAsList.size()) {
                     boolean flag = true;
-                    for (int k = 0; k < firstWord.length() ; k++) {
+                    for (int k = 0; k < firstWord.length(); k++) {
                         int index = secondWordAsList.indexOf("" + firstWord.charAt(k));
                         if (index == -1) {
                             flag = false;
@@ -53,18 +76,9 @@ public class Problem01 {
         return result;
     }
 
-    private static List<String> getWords() throws IOException {
-
-        List<String> words = new ArrayList<>();
+    private static String getWords() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter word ('Enter' for end.)");
-        String word = reader.readLine();
-        while (!word.equals("")) {
-            words.add(word);
-            System.out.printf(String.format("List of words: %s%n", words.toString()));
-            System.out.println("Enter words ('Enter' for end.)");
-            word = reader.readLine();
-        }
-        return words;
+        System.out.println("Please enter word:");
+        return reader.readLine();
     }
 }
