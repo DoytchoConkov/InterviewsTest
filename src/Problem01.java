@@ -13,7 +13,7 @@ public class Problem01 {
         while (!input.equals("")) {
             switch (input) {
                 case "1" -> addListOfWords(words);
-                case "2" -> words.add(getWords());
+                case "2" -> words.add(addWord());
                 case "3" -> {
                     Map<String, String> anagramsResult = checkWords(words);
                     printResult(anagramsResult);
@@ -32,14 +32,17 @@ public class Problem01 {
         System.out.println("'Enter' for exit.");
     }
 
-    private static void printResult(Map<String, String> result) {
-        if (result.isEmpty()) {
-            System.out.println("There are no anagrams");
-            return;
-        }
-        System.out.println("The Anagrams pair are:");
-        result.keySet().forEach(key -> System.out.printf("%s - %s%n", key, result.get(key)));
-        System.out.println();
+    private static void addListOfWords(List<String> words) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please enter list of word separated by ',':");
+        List<String> inputWords = Arrays.stream(reader.readLine().split(",")).collect(Collectors.toList());
+        words.addAll(inputWords);
+    }
+
+    private static String addWord() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please enter word:");
+        return reader.readLine();
     }
 
     private static Map<String, String> checkWords(List<String> words) {
@@ -69,16 +72,13 @@ public class Problem01 {
         return result;
     }
 
-    private static String getWords() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please enter word:");
-        return reader.readLine();
-    }
-
-    private static void addListOfWords(List<String> words) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please enter list of word separated by ',':");
-        List<String> inputWords = Arrays.stream(reader.readLine().split(",")).collect(Collectors.toList());
-        words.addAll(inputWords);
+    private static void printResult(Map<String, String> result) {
+        if (result.isEmpty()) {
+            System.out.println("There are no anagrams");
+            return;
+        }
+        System.out.println("The Anagrams pair are:");
+        result.keySet().forEach(key -> System.out.printf("%s - %s%n", key, result.get(key)));
+        System.out.println();
     }
 }
