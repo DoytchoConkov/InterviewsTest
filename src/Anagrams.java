@@ -25,11 +25,10 @@ public class Anagrams {
     }
 
     private static void printMenu() {
-        System.out.println("Please choose option:");
-        System.out.println("1 - for input list of words.");
-        System.out.println("2 - for input word");
-        System.out.println("3 - show result for anagrams");
-        System.out.println("'Enter' for exit.");
+        System.out.println("Please choose option ('Enter' for exit):");
+        System.out.println("1 - to enter list of words.");
+        System.out.println("2 - to enter word");
+        System.out.println("3 - to show result of anagrams");
     }
 
     private static void addListOfWords(List<String> words) throws IOException {
