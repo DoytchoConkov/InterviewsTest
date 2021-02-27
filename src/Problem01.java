@@ -15,8 +15,8 @@ public class Problem01 {
                 case "1" -> addListOfWords(words);
                 case "2" -> words.add(getWords());
                 case "3" -> {
-                    Map<String, String> result = checkWords(words);
-                    printResult(result);
+                    Map<String, String> anagramsResult = checkWords(words);
+                    printResult(anagramsResult);
                 }
             }
             printMenu();
@@ -28,23 +28,16 @@ public class Problem01 {
         System.out.println("Please choose option:");
         System.out.println("1 - for input list of words.");
         System.out.println("2 - for input word");
-        System.out.println("3 - show result for acronyms");
+        System.out.println("3 - show result for anagrams");
         System.out.println("'Enter' for exit.");
-    }
-
-    private static void addListOfWords(List<String> words) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please enter list of word separated by ',':");
-        List<String> inputWords = Arrays.stream(reader.readLine().split(",")).collect(Collectors.toList());
-        words.addAll(inputWords);
     }
 
     private static void printResult(Map<String, String> result) {
         if (result.isEmpty()) {
-            System.out.println("There are no acronyms");
+            System.out.println("There are no anagrams");
             return;
         }
-        System.out.println("The Acronyms pair are:");
+        System.out.println("The Anagrams pair are:");
         result.keySet().forEach(key -> System.out.printf("%s - %s%n", key, result.get(key)));
         System.out.println();
     }
@@ -80,5 +73,12 @@ public class Problem01 {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Please enter word:");
         return reader.readLine();
+    }
+
+    private static void addListOfWords(List<String> words) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please enter list of word separated by ',':");
+        List<String> inputWords = Arrays.stream(reader.readLine().split(",")).collect(Collectors.toList());
+        words.addAll(inputWords);
     }
 }
