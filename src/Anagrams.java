@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
+// :-) This is for good mood!
+
 public class Anagrams {
     public static void main(String[] args) throws IOException {
         List<String> words = new ArrayList<>();
